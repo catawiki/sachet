@@ -76,10 +76,16 @@ func main() {
 			text = "Alert \n" + strings.Join(data.CommonLabels.Values(), " | ")
 		}
 
-		message := sachet.Message{
-			To:   receiverConf.To,
-			From: receiverConf.From,
-			Text: text,
+		message := sachet.NewMessage(receiverConf.To, receiverConf.From, text, receiverConf.Type)
+
+		if len(receiverConf.Voice) > 0 {
+			message.Voice = receiverConf.Voice
+		}
+		if len(receiverConf.Language) > 0 {
+			message.Language = receiverConf.Language
+		}
+		if receiverConf.Repeat > 0 {
+			message.Repeat = receiverConf.Repeat
 		}
 
 		if err = provider.Send(message); err != nil {

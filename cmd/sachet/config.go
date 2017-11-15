@@ -12,6 +12,10 @@ type ReceiverConf struct {
 	Provider string
 	To       []string
 	From     string
+	Type     string
+	Language string
+	Voice    string
+	Repeat   int
 }
 
 var config struct {
